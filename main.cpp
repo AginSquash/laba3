@@ -27,10 +27,28 @@ int main() {
 
     map<string, string> dictionary = loadDcitionary();
 
+    string line;
+
+    string dict = "";
+    ifstream in("dict.txt");
+    if (in.is_open())
+    {
+        while (getline(in, line))
+        {
+            dict += line + ";";
+        }
+    }
+    in.close();
+
     cout << "Введите слово для которого нужно подобрать анотоним:" << endl;
     string word;
     cin >> word;
-    cout << "Антоним к " << word << " - " << dictionary[word] << endl;
+
+    int index = dict.find(word);
+    if ( dict[index + word.length()] == ';' )
+    {
+        
+    }
 
     return 0;
 }
