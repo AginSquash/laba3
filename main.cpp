@@ -36,19 +36,39 @@ int main() {
         while (getline(in, line))
         {
             dict += line + ";";
+            cout << dict;
         }
     }
     in.close();
 
-    cout << "Введите слово для которого нужно подобрать анотоним:" << endl;
+    cout << "Введите слово для которого нужно подобрать антоним:" << endl;
     string word;
     cin >> word;
 
     int index = dict.find(word);
+
+    string str = "";
     if ( dict[index + word.length()] == ';' )
     {
-        
+        int n_index = index - 2;
+        while (dict[n_index] != ';')
+        {
+            str += dict[n_index];
+            n_index--;
+        }
+
+        string new_str = "";
+        for (int i = str.length(); i > 0; i-- )
+        {
+            if (str[i] != NULL)
+            {
+                new_str += str[i];
+            }
+        }
+
+        cout << new_str << endl;
     }
+
 
     return 0;
 }
