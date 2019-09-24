@@ -5,11 +5,11 @@
 
 using namespace std;
 
+
 map <string, string> loadDcitionary()
 {
     string line;
     map <string, string> dictionary;
-
     ifstream in("dict.txt");
     if (in.is_open())
     {
@@ -57,7 +57,7 @@ int main() {
             n_index--;
         }
 
-        string new_str = "";
+        string new_str = ""; //FIXME можно юзать срез
         for (int i = str.length(); i > 0; i-- )
         {
             if (str[i] != NULL)
@@ -67,6 +67,17 @@ int main() {
         }
 
         cout << new_str << endl;
+    } else {
+        cout << "It Work!" << endl;
+        index += word.length() + 2;
+        int end_index = index;
+        while (dict[end_index] != ';')
+        {
+            end_index++;
+            cout << end_index << endl;
+        }
+        str = dict.substr(index, end_index);
+        cout << str <<endl;
     }
 
 
