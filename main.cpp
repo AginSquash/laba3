@@ -76,7 +76,7 @@ int main() {
             end_index++;
             cout << end_index << endl;
         }
-        str = dict.substr(index, end_index);
+        str = dict.substr(index, end_index-1);
         cout << str <<endl;
     }
 
