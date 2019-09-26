@@ -1,36 +1,59 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
 
 using namespace std;
 
-map <string, string> loadDcitionary()
-{
-    string line;
-    map <string, string> dictionary;
 
-    ifstream in("dict.txt");
+int main() {
+    setlocale(LC_ALL, "rus"); // Может правда дело в этом?
+
+    std::string line;
+
+    std::ifstream in("dict.txt");
+
+    string sizeSTR;
+    getline(in, sizeSTR); // Получение первой строки
+    sizeSTR = sizeSTR.substr(1); //убираем знак &
+    const int size = stoi(sizeSTR);
+    string array[ size ];
+    int i = 0;
+
     if (in.is_open())
     {
         while (getline(in, line))
         {
-            int index = line.find("::");
-            dictionary.insert( make_pair( line.substr(0, index), line.substr(index + 2 ) ) );
+            array[i] = line;
+            i++;
         }
     }
     in.close();
-    return  dictionary;
-}
 
-int main() {
-
-    map<string, string> dictionary = loadDcitionary();
-
-    cout << "Введите слово для которого нужно подобрать анотоним:" << endl;
+    cout << "Введите слово: ";
     string word;
     cin >> word;
-    cout << "Антоним к " << word << " - " << dictionary[word] << endl;
+
+    for (int i = 0; i < size; i++)
+    {
+        cout << "Array: " << array[i];
+
+        if ( array[i].find(word) < array[i].length() ) // find почему-то если строка не соддержит word возвращает безумное занчение
+        {
+            int index = array[i].find(':'); // Разбиавем строку на два значения по разделителю
+            string dict[2];
+            dict[0] = array[i].substr(0, index);
+            index++;
+            dict[1] = array[i].substr(index);
+
+            if (dict[0] == word)
+            {
+                cout << "Антоним к " << word << " это слово " << dict[1];
+            } else {
+                cout << "Антоним к " << word << " это слово " << dict[0];
+            }
+            break;
+        }
+    }
 
     return 0;
 }
