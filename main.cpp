@@ -1,36 +1,38 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
 
 using namespace std;
 
-map <string, string> loadDcitionary()
-{
-    string line;
-    map <string, string> dictionary;
 
-    ifstream in("dict.txt");
+int main() {
+    setlocale(LC_ALL, "rus"); // Может правда дело в этом?
+
+    std::string line;
+
+    std::ifstream in("dict.txt");
+
+    string size;
+    getline(in, size); // Получение первой строки
+    size = size.substr(1); //убираем знак &
+    string array[ stoi(size) ];
+    int i = 0;
+
     if (in.is_open())
     {
         while (getline(in, line))
         {
-            int index = line.find("::");
-            dictionary.insert( make_pair( line.substr(0, index), line.substr(index + 2 ) ) );
+            if (i > 0) {
+                array[i] = line;
+            }
+            i++;
         }
     }
     in.close();
-    return  dictionary;
-}
 
-int main() {
+    
 
-    map<string, string> dictionary = loadDcitionary();
 
-    cout << "Введите слово для которого нужно подобрать анотоним:" << endl;
-    string word;
-    cin >> word;
-    cout << "Антоним к " << word << " - " << dictionary[word] << endl;
 
     return 0;
 }
