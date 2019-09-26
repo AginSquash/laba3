@@ -1,31 +1,23 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
+
+#define CORRESPONDS ':'
+#define END_LINE '|'
 
 using namespace std;
 
-
-map <string, string> loadDcitionary()
+string getWordAfter(string dict, const int index)
 {
-    string line;
-    map <string, string> dictionary;
-    ifstream in("dict.txt");
-    if (in.is_open())
+    int end_index = index;
+    while ( dict[end_index + 1] != END_LINE)
     {
-        while (getline(in, line))
-        {
-            int index = line.find("::");
-            dictionary.insert( make_pair( line.substr(0, index), line.substr(index + 2 ) ) );
-        }
+        end_index++;
     }
-    in.close();
-    return  dictionary;
+    return dict.substr(index, end_index ) ;
 }
 
 int main() {
-
-    map<string, string> dictionary = loadDcitionary();
 
     string line;
 
@@ -35,51 +27,41 @@ int main() {
     {
         while (getline(in, line))
         {
-            dict += line + ";";
-            cout << dict;
+            dict += line + END_LINE;
         }
     }
     in.close();
+
+    cout << dict << endl;
 
     cout << "Введите слово для которого нужно подобрать антоним:" << endl;
     string word;
     cin >> word;
 
-    int index = dict.find(word);
+    const int index = dict.find(word);
 
-    string str = "";
-    if ( dict[index + word.length()] == ';' )
+
+    cout << "dict[ (index + word.length() ) ]: " << dict[ (index + word.length() ) ] << endl;
+
+    cout << "dict[ (index - 1) ]: " << dict[ (index - 1) ] << endl;
+
+    /*if ( dict[ (index + word.length() ) ] == end_line )
     {
-        int n_index = index - 2;
-        while (dict[n_index] != ';')
-        {
-            str += dict[n_index];
-            n_index--;
-        }
+        cout << "End line";
+    } else if ( dict[ (index - 1) ] == ':' ) {
 
-        string new_str = ""; //FIXME можно юзать срез
-        for (int i = str.length(); i > 0; i-- )
-        {
-            if (str[i] != NULL)
-            {
-                new_str += str[i];
-            }
-        }
+        cout << "Middle";
+    } */
 
-        cout << new_str << endl;
-    } else {
-        cout << "It Work!" << endl;
-        index += word.length() + 2;
-        int end_index = index;
-        while (dict[end_index] != ';')
-        {
-            end_index++;
-            cout << end_index << endl;
-        }
-        str = dict.substr(index, end_index-1);
-        cout << str <<endl;
+    switch ( dict[ (index + word.length()) ] )
+    {
+        case CORRESPONDS:
+
+            string antonym = getWordAfter(dict, index + word.length() );
+            cout << antonym << endl;
+            break;
+
     }
-
 
     return 0;
 }
