@@ -12,10 +12,11 @@ int main() {
 
     std::ifstream in("dict.txt");
 
-    string size;
-    getline(in, size); // Получение первой строки
-    size = size.substr(1); //убираем знак &
-    string array[ stoi(size) ];
+    string sizeSTR;
+    getline(in, sizeSTR); // Получение первой строки
+    sizeSTR = sizeSTR.substr(1); //убираем знак &
+    const int size = stoi(sizeSTR);
+    string array[ size ];
     int i = 0;
 
     if (in.is_open())
@@ -30,9 +31,17 @@ int main() {
     }
     in.close();
 
-    
+    cout << "Введите слово: ";
+    string word;
+    cin >> word;
 
+    for (int i = 0; i < size; i++)
+    {
+        if ( array[i].find(word) < array[i].length() ) // find почему-то если строка не соддержит word возвращает безумное занчение
+        {
 
+        }
+    }
 
     return 0;
 }
