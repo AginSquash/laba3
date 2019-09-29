@@ -4,9 +4,18 @@
 # IntelliJ
 out/
 .idea/*
+.gitattributes
 
 # Debug files
-cmake-build-*/
+cmake-build-debug/CMakeFiles
+cmake-build-debug/ChessCPP
+cmake-build-debug/ChessCPP.cbp
+cmake-build-debug/cmake_install.cmake
+cmake-build-debug/CMakeCache.txt
+cmake-build-debug/Makefile
+cmake-build-debug/Project.cbp
+cmake-build-debug/laba3.cbp
+
 
 # Prerequisites
 *.d
@@ -40,3 +49,4 @@ cmake-build-*/
 *.exe
 *.out
 *.app
+
