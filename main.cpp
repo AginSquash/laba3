@@ -16,7 +16,8 @@ int main() {
     getline(in, sizeSTR); // Получение первой строки
     sizeSTR = sizeSTR.substr(1); //убираем знак &
     const int size = stoi(sizeSTR);
-    string array[ size ];
+    //string array[ size ];
+    string *array = new string[size];
     int i = 0;
 
     if (in.is_open())
@@ -35,7 +36,9 @@ int main() {
 
     for (int i = 0; i < size; i++)
     {
-        cout << "Array: " << array[i];
+        cout << "Array: " << array[i] << endl;
+        cout << "Len: " << array[i].length() << endl;
+        cout << "Find word: " << array[i].find(word) << endl;
 
         if ( array[i].find(word) < array[i].length() ) // find почему-то если строка не соддержит word возвращает безумное занчение
         {
@@ -54,6 +57,6 @@ int main() {
             break;
         }
     }
-
+    delete[] array;
     return 0;
 }
