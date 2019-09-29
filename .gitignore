@@ -1,5 +1,6 @@
 # File-based project format
 *.iws
+.DS_Store
 
 # IntelliJ
 out/
@@ -16,6 +17,7 @@ cmake-build-debug/Makefile
 cmake-build-debug/Project.cbp
 cmake-build-debug/laba3.cbp
 
+CMakeLists.txt
 
 # Prerequisites
 *.d
